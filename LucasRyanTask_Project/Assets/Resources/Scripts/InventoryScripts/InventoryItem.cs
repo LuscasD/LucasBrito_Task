@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu(menuName = "Inventory/Item")]
 public class InventoryItem : ScriptableObject
@@ -8,6 +9,10 @@ public class InventoryItem : ScriptableObject
     public bool isStackable;
     public int maxStack = 1;
     public string description;
+    public UnityEvent onPickup;
+
+    public GameObject modelPrefab;
+    public bool isWeapon;
 
     public virtual void Use()
     {

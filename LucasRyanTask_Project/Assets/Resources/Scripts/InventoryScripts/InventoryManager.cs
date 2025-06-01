@@ -11,15 +11,17 @@ public class InventoryManager : MonoBehaviour
 
     private string SavePath => Path.Combine(Application.persistentDataPath, "inventory_save.json");
 
+
     void Awake()
     {
         for (int i = 0; i < maxSlots; i++)
             slots.Add(new SlotScipt());
 
         LoadInventory();
+
     }
 
-   public void DebugInventory()
+        public void DebugInventory()
     {
         Debug.Log("Save file path: " + SavePath);
     }

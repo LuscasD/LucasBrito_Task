@@ -10,8 +10,15 @@ public class PlayerMovment : MonoBehaviour
     public float moveSpeed = 6f;
     public float turnSmoothTime = 0.1f;
 
+    [Header("Gravity Settings")]
+    public float gravity = -9.81f;
+    public float groundCheckDistance = 0.2f;
+    public LayerMask groundMask;
+
     private CharacterController characterController;
     private float turnSmoothVelocity;
+    private Vector3 velocity;
+    private bool isGrounded;
 
     void Start()
     {
@@ -22,6 +29,7 @@ public class PlayerMovment : MonoBehaviour
     void Update()
     {
         HandleMovement();
+        ApplyGravity();
     }
 
     void HandleMovement()
@@ -35,7 +43,6 @@ public class PlayerMovment : MonoBehaviour
 
         if (isMoving)
         {
-            // Calculate rotation relative to camera
             float targetAngle = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
             float smoothedAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
 
@@ -44,6 +51,20 @@ public class PlayerMovment : MonoBehaviour
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             characterController.Move(moveDirection.normalized * moveSpeed * Time.deltaTime);
         }
+    }
+
+    void ApplyGravity()
+    {
+        // Verifica se está no chão com um SphereCast
+        isGrounded = Physics.CheckSphere(transform.position + Vector3.down * 0.1f, groundCheckDistance, groundMask);
+
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f; // mantém o jogador "colado" no chão
+        }
+
+        velocity.y += gravity * Time.deltaTime;
+        characterController.Move(velocity * Time.deltaTime);
     }
 
 }

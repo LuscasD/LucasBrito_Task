@@ -18,6 +18,9 @@ public class Slot_UI : MonoBehaviour,
 
     public Description_Manager descriptionManager;
 
+    public enum SlotType { Inventory, WeaponSlot }
+    public SlotType slotType = SlotType.Inventory;
+
     private Inventory_UI inventoryUI => GetComponentInParent<Inventory_UI>();
 
     void Start()
@@ -68,7 +71,22 @@ public class Slot_UI : MonoBehaviour,
         var dragged = eventData.pointerDrag?.GetComponent<Slot_UI>();
         if (dragged == null || dragged == this) return;
 
-        SwapSlots(dragged.index, this.index);
+        var draggedSlot = inventoryUI.inventory.slots[dragged.index];
+
+        if (slotType == SlotType.WeaponSlot && draggedSlot.item != null && draggedSlot.item.isWeapon)
+        {
+            // Equipar arma
+            EquipmentManager.Instance.EquipWeapon(draggedSlot.item);
+
+            // Remove do inventário (poderia mover ou duplicar, dependendo da lógica que quiser)
+            inventoryUI.inventory.slots[dragged.index].ClearSlot();
+        }
+        else if (slotType == SlotType.Inventory && dragged.slotType == SlotType.Inventory)
+        {
+            // Apenas troca de slots comuns
+            SwapSlots(dragged.index, this.index);
+        }
+
         inventoryUI.UpdateUI();
     }
 

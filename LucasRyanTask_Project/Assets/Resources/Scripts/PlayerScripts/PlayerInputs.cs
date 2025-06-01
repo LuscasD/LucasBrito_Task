@@ -4,6 +4,7 @@ public class PlayerInputs : MonoBehaviour
 {
     [SerializeField] private GameObject inventoryUI;
     private bool isOpen = false;
+    [SerializeField] private GameObject inventoryIcon;
 
     void Update()
     {
@@ -12,10 +13,12 @@ public class PlayerInputs : MonoBehaviour
 
             isOpen = !isOpen;
             inventoryUI.SetActive(isOpen);
+            inventoryIcon.SetActive(!isOpen);
 
             if (isOpen) 
             {
                 Cursor.lockState = CursorLockMode.None;
+                
             }
             else if (!isOpen)
             {

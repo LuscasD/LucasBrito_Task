@@ -8,7 +8,7 @@ public class Inventory_UI : MonoBehaviour
 
     private Slot_UI[] slotUIs;
 
-    void Start()
+    void Awake()
     {
         slotUIs = new Slot_UI[inventory.maxSlots];
 
