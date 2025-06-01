@@ -2,7 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Slot_UI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+public class Slot_UI : MonoBehaviour,
+    IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler,
+    IPointerEnterHandler, IPointerExitHandler
 {
     public Image icon;
     public Text quantityText;
@@ -14,12 +16,29 @@ public class Slot_UI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     private Canvas canvas;
     private CanvasGroup canvasGroup;
 
+    public Description_Manager descriptionManager;
+
     private Inventory_UI inventoryUI => GetComponentInParent<Inventory_UI>();
 
     void Start()
     {
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = gameObject.AddComponent<CanvasGroup>();
+        descriptionManager = FindObjectOfType<Description_Manager>(true);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        var slot = inventoryUI.inventory.slots[index];
+        if (!slot.IsEmpty)
+        {
+            descriptionManager.SetDescription(slot.item);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        descriptionManager.SetDescription(null); // Oculta a descrição ao sair
     }
 
     public void OnBeginDrag(PointerEventData eventData)

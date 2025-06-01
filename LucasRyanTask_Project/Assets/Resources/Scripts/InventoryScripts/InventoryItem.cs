@@ -7,6 +7,7 @@ public class InventoryItem : ScriptableObject
     public Sprite icon;
     public bool isStackable;
     public int maxStack = 1;
+    public string description;
 
     public virtual void Use()
     {
