@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public class SlotScipt : MonoBehaviour
+public class SlotScipt
 {
     public InventoryItem item;
     public int quantity;
