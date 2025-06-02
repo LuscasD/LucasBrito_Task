@@ -26,6 +26,7 @@ public class EquipmentSlotUI : MonoBehaviour, IPointerClickHandler, IPointerEnte
 
     public void Equip(InventoryItem item)
     {
+        Unequip();
         equippedItem = item;
         icon.sprite = item.icon;
         icon.enabled = true;

@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 69885
+  controlID: 131064
   draggingID: 0
 --- !u!114 &2
 MonoBehaviour:
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 69886
+  controlID: 131065
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 69887
+  controlID: 131066
   draggingID: 0
 --- !u!114 &5
 MonoBehaviour:
@@ -200,8 +200,8 @@ MonoBehaviour:
     y: 0
     width: 333
     height: 696
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 226}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 6}
   m_Panes:
   - {fileID: 6}
@@ -246,23 +246,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: c45df9ff
-      m_LastClickedID: -434748
-      m_ExpandedIDs: feb2faffb04cfbff1ac7fbffd8eafcff88eefcff86f6fcffdc22fdff886bfdffae72fdffe87cfdff0a7dfdff2c7dfdff4e7dfdff707dfdff3284fdff5484fdff9884fdffba84fdffdc84fdfffe84fdff2085fdff4285fdff6485fdff8685fdffa885fdffca85fdffec85fdff0e86fdff3086fdff5831feffe435feff2c4efeff2cf0feff2ef0feff30f0feff58f0feff9ef6feff8e7affffaa7affffae7affffb27affffba7affffc67affffe27affffe67affffea7afffffa7afffffe7affff027bffff067bffff0cc7fffff0f0ffff20fbffff
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: feb2faffb04cfbff1ac7fbff4a4efcffd8eafcff88eefcffdc22fdff886bfdffae72fdffe87cfdff0a7dfdff2c7dfdff4e7dfdff707dfdff3284fdff5484fdff9884fdffba84fdffdc84fdfffe84fdff2085fdff4285fdff6485fdff8685fdffa885fdffca85fdffec85fdff0e86fdff3086fdff5831feffe435feff2c4efeff2ef0feff30f0feff9ef6feff8e7affffaa7affffae7affffb27affffba7affffc67affffe27affffe67affffea7afffffa7afffffe7affff027bffff067bffff0cc7fffff0f0ffff20fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: Potion
+        m_OriginalName: Potion
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: -116584
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_TrimLeadingAndTrailingWhitespace: 0
         m_ClientGUIView: {fileID: 5}
@@ -880,9 +880,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 2.0862422, y: -8.208811, z: 20.480158}
+    m_Target: {x: -2.27, y: -0.7089999, z: 16.53}
     speed: 2
-    m_Value: {x: 2.0862422, y: -8.208811, z: 20.480158}
+    m_Value: {x: -2.27, y: -0.7089999, z: 16.53}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -928,13 +928,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.2347611, y: 0.05130599, z: -0.012409338, w: 0.9706197}
+    m_Target: {x: 0.22891267, y: 0.1944192, z: -0.046715304, w: 0.9526911}
     speed: 2
-    m_Value: {x: 0.23476091, y: 0.05130595, z: -0.012409328, w: 0.97061884}
+    m_Value: {x: 0.2289124, y: 0.19441897, z: -0.04671525, w: 0.95268995}
   m_Size:
-    m_Target: 14.06284
+    m_Target: 0.3294054
     speed: 2
-    m_Value: 14.06284
+    m_Value: 0.3294054
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1182,7 +1182,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 79}
     m_SelectedIDs: c8a60000
     m_LastClickedID: 42696
-    m_ExpandedIDs: 00000000c8a6000034a7000038a7000040a700009ea70000b8ba000018bc00006cbd0000eae10000fc0d01004c7d010000ca9a3b
+    m_ExpandedIDs: 0000000034a7000038a7000040a700009ea70000b8ba000018bc00006cbd0000eae10000fc0d01004c7d010000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1211,7 +1211,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 60af0000
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000034a7000038a7000040a700009ea70000b8ba000018bc00006cbd0000eae10000fc0d010000ca9a3b
+    m_ExpandedIDs: 0000000034a7000038a7000040a700009ea70000b8ba000018bc00006cbd0000eae10000fc0d01004c7d010000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1415,7 +1415,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 158
+  m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
