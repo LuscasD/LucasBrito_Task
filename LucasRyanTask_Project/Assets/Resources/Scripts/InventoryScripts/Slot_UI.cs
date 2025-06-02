@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 public class Slot_UI : MonoBehaviour,
     IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler,
@@ -17,6 +18,7 @@ public class Slot_UI : MonoBehaviour,
     private CanvasGroup canvasGroup;
 
     public Description_Manager descriptionManager;
+    public RemoveItenAreaScript removeItemArea;
 
     public enum SlotType { Inventory, WeaponSlot }
     public SlotType slotType = SlotType.Inventory;
@@ -28,6 +30,7 @@ public class Slot_UI : MonoBehaviour,
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = gameObject.AddComponent<CanvasGroup>();
         descriptionManager = FindObjectOfType<Description_Manager>(true);
+        removeItemArea = FindObjectOfType<RemoveItenAreaScript>(true);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -51,6 +54,7 @@ public class Slot_UI : MonoBehaviour,
 
         DragItemIconScript.Instance.Show(slot.item.icon);
         canvasGroup.blocksRaycasts = false;
+        removeItemArea.areaCanvaGroup.DOFade(1, 0.6f);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -65,6 +69,7 @@ public class Slot_UI : MonoBehaviour,
     {
         DragItemIconScript.Instance.Hide();
         canvasGroup.blocksRaycasts = true;
+        removeItemArea.areaCanvaGroup.DOFade(0, 0.6f);
     }
 
     public void OnDrop(PointerEventData eventData)

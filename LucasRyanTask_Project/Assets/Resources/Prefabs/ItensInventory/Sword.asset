@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   itemName: Iron Sword
-  icon: {fileID: 21300000, guid: a7ada5f96f332ef4f97f5de96d2d9fe1, type: 3}
+  icon: {fileID: 21300000, guid: a7e2f83f21369014285f8ac5c67e00e9, type: 3}
   isStackable: 0
   maxStack: 1
   description: It's dangerous to go alone! Take this
