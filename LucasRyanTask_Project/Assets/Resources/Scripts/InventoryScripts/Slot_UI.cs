@@ -54,7 +54,7 @@ public class Slot_UI : MonoBehaviour,
 
         DragItemIconScript.Instance.Show(slot.item.icon);
         canvasGroup.blocksRaycasts = false;
-        removeItemArea.areaCanvaGroup.DOFade(1, 0.6f);
+        removeItemArea.areaCanvaGroup.DOFade(1, 0.5f);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -69,7 +69,7 @@ public class Slot_UI : MonoBehaviour,
     {
         DragItemIconScript.Instance.Hide();
         canvasGroup.blocksRaycasts = true;
-        removeItemArea.areaCanvaGroup.DOFade(0, 0.6f);
+        removeItemArea.areaCanvaGroup.DOFade(0, 0.5f);
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -136,6 +136,7 @@ public class Slot_UI : MonoBehaviour,
             if (!slot.item.isStackable || --slot.quantity <= 0)
                 slot.ClearSlot();
 
+            inventoryUI.inventory.SaveInventory();
             inventoryUI.UpdateUI();
         }
     }

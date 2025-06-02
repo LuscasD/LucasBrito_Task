@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 
 
-public class EquipmentSlotUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class EquipmentSlotUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IDropHandler
 {
     public Image icon;
     private InventoryItem equippedItem;
@@ -70,4 +70,27 @@ public class EquipmentSlotUI : MonoBehaviour, IPointerClickHandler, IPointerEnte
             Unequip();
         }
     }
+
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        var draggedSlotUI = eventData.pointerDrag?.GetComponent<Slot_UI>();
+        if (draggedSlotUI == null) return;
+
+      
+        var slotData = Inventory_UI.Instance.inventory.slots[draggedSlotUI.Index];
+        if (slotData.IsEmpty) return;
+
+       
+        Unequip();
+        Equip(slotData.item);
+
+        Inventory_UI.Instance.inventory.RemoveItem(draggedSlotUI.Index);
+
+        Inventory_UI.Instance.UpdateUI();
+
+        Debug.Log("Item equipado via drag and drop.");
+
+    }
+
 }

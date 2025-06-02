@@ -9,8 +9,7 @@ public class InventoryManager : MonoBehaviour
     public List<InventoryItem> allItems; // Database of possible items
     public Inventory_UI uiManager;
 
-    private string SavePath => Path.Combine(Application.persistentDataPath, "inventory_save.json");
-
+    private const string SaveKey = "InventorySave";
 
     void Awake()
     {
@@ -18,16 +17,16 @@ public class InventoryManager : MonoBehaviour
             slots.Add(new SlotScipt());
 
         LoadInventory();
-
     }
 
-        public void DebugInventory()
+    public void DebugInventory()
     {
-        Debug.Log("Save file path: " + SavePath);
+        Debug.Log("Salvando usando PlayerPrefs com a chave: " + SaveKey);
     }
 
     public bool AddItem(InventoryItem item, int amount = 1)
     {
+        SaveInventory();
         if (item.isStackable)
         {
             foreach (var slot in slots)
@@ -81,20 +80,27 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        string json = JsonUtility.ToJson(data, true);
-        File.WriteAllText(SavePath, json);
-        Debug.Log($"Inventory saved to: {SavePath}");
+        // Salvar o nome do item equipado, se houver
+        if (EquipmentManager.Instance.equippedItem != null)
+        {
+            data.equippedWeaponName = EquipmentManager.Instance.equippedItem.name;
+        }
+
+        string json = JsonUtility.ToJson(data);
+        PlayerPrefs.SetString("InventorySave", json);
+        PlayerPrefs.Save();
+        Debug.Log("Inventário salvo nos PlayerPrefs.");
     }
 
     public void LoadInventory()
     {
-        if (!File.Exists(SavePath))
+        if (!PlayerPrefs.HasKey("InventorySave"))
         {
-            Debug.Log("No inventory save file found.");
+            Debug.Log("Nenhum save encontrado nos PlayerPrefs.");
             return;
         }
 
-        string json = File.ReadAllText(SavePath);
+        string json = PlayerPrefs.GetString("InventorySave");
         InventorySaveData data = JsonUtility.FromJson<InventorySaveData>(json);
 
         for (int i = 0; i < slots.Count && i < data.slots.Count; i++)
@@ -111,28 +117,41 @@ public class InventoryManager : MonoBehaviour
                 if (item != null)
                     slots[i].AddItem(item, sData.quantity);
                 else
-                    Debug.LogWarning($"Item '{sData.itemName}' not found in item database.");
+                    Debug.LogWarning($"Item '{sData.itemName}' não encontrado na database.");
             }
         }
 
-        Debug.Log("Inventory loaded from file.");
+        // Restaurar o item equipado (caso tenha sido salvo)
+        if (!string.IsNullOrEmpty(data.equippedWeaponName))
+        {
+            InventoryItem equipped = allItems.Find(x => x.name == data.equippedWeaponName);
+            if (equipped != null)
+            {
+                EquipmentSlotUI.Instance.Equip(equipped);
+            }
+        }
+
+        Debug.Log("Inventário carregado dos PlayerPrefs.");
     }
 
     public void DeleteSave()
     {
-        if (File.Exists(SavePath))
+        if (PlayerPrefs.HasKey(SaveKey))
         {
-            File.Delete(SavePath);
-            Debug.Log("Inventory save deleted.");
+            PlayerPrefs.DeleteKey(SaveKey);
+            Debug.Log("Save do inventário apagado.");
         }
     }
 }
 
+[System.Serializable]
 public class InventorySaveData
 {
     public List<SlotData> slots = new List<SlotData>();
+    public string equippedWeaponName;
 }
 
+[System.Serializable]
 public class SlotData
 {
     public string itemName;

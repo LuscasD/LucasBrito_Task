@@ -15,7 +15,7 @@ public class RemoveItenAreaScript : MonoBehaviour, IDropHandler
         areaCanvaGroup.DOFade(0, 0);
     }
 
-        public void OnDrop(PointerEventData eventData)
+      public void OnDrop(PointerEventData eventData)
     {
         var dragged = eventData.pointerDrag?.GetComponent<Slot_UI>();
         if (dragged == null) return;

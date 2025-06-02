@@ -6,6 +6,8 @@ public class EquipmentManager : MonoBehaviour
 
     public Transform weaponHolder; // remover o static
     private GameObject currentWeapon;
+    public InventoryItem equippedItem;
+    public InventoryManager _inventoryManager;
 
     void Awake()
     {
@@ -14,6 +16,7 @@ public class EquipmentManager : MonoBehaviour
 
     public void EquipWeapon(InventoryItem weaponItem)
     {
+         equippedItem = weaponItem;
         if (currentWeapon != null)
             Destroy(currentWeapon);
 
@@ -23,11 +26,15 @@ public class EquipmentManager : MonoBehaviour
             currentWeapon.transform.localPosition = Vector3.zero;
             currentWeapon.transform.localRotation = Quaternion.identity;
         }
+        _inventoryManager.SaveInventory();
     }
 
     public void UnequipWeapon()
     {
+        equippedItem = null;
         if (currentWeapon != null)
             Destroy(currentWeapon);
+
+        _inventoryManager.SaveInventory();
     }
 }
