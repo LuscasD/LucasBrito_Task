@@ -4,36 +4,30 @@ public class EquipmentManager : MonoBehaviour
 {
     public static EquipmentManager Instance;
 
-    public Transform weaponHandTransform;
-    private GameObject currentWeaponModel;
-
-    private InventoryItem equippedWeapon;
+    public Transform weaponHolder; // remover o static
+    private GameObject currentWeapon;
 
     void Awake()
     {
         Instance = this;
     }
 
-    public void EquipWeapon(InventoryItem weapon)
+    public void EquipWeapon(InventoryItem weaponItem)
     {
-        if (currentWeaponModel != null)
-            Destroy(currentWeaponModel);
+        if (currentWeapon != null)
+            Destroy(currentWeapon);
 
-        equippedWeapon = weapon;
-
-        if (weapon.modelPrefab != null)
+        if (weaponItem.modelPrefab != null && weaponHolder != null)
         {
-            currentWeaponModel = Instantiate(weapon.modelPrefab, weaponHandTransform);
-            currentWeaponModel.transform.localPosition = Vector3.zero;
-            currentWeaponModel.transform.localRotation = Quaternion.identity;
+            currentWeapon = Instantiate(weaponItem.modelPrefab, weaponHolder);
+            currentWeapon.transform.localPosition = Vector3.zero;
+            currentWeapon.transform.localRotation = Quaternion.identity;
         }
     }
 
     public void UnequipWeapon()
     {
-        if (currentWeaponModel != null)
-            Destroy(currentWeaponModel);
-
-        equippedWeapon = null;
+        if (currentWeapon != null)
+            Destroy(currentWeapon);
     }
 }

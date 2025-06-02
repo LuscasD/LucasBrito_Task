@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e65734eec9b0594e8edb98844c354eb, type: 3}
-  m_Name: Sword
+  m_Name: Mushroon
   m_EditorClassIdentifier: 
-  itemName: Iron Sword
-  icon: {fileID: 21300000, guid: a7ada5f96f332ef4f97f5de96d2d9fe1, type: 3}
-  isStackable: 0
-  maxStack: 1
-  description: It's dangerous to go alone! Take this
+  itemName: Mushroon
+  icon: {fileID: 21300000, guid: f318f01936104674ca54e4b12b226ff2, type: 3}
+  isStackable: 1
+  maxStack: 3
+  description: Causes -5 damage  "Not exactly edible"
   onPickup:
     m_PersistentCalls:
       m_Calls: []
-  modelPrefab: {fileID: 2810175753375802199, guid: eabb92ece2a059f4980721bc8859689b, type: 3}
-  isWeapon: 1
+  modelPrefab: {fileID: 0}
+  isWeapon: 0

@@ -14,9 +14,15 @@ public class InventoryItem : ScriptableObject
     public GameObject modelPrefab;
     public bool isWeapon;
 
+
     public virtual void Use()
     {
         Debug.Log("Used: " + itemName);
+
+        if (isWeapon)
+        {
+            EquipmentSlotUI.Instance.Equip(this);
+        }
         // Extend this in child classes for specific behavior
     }
 }

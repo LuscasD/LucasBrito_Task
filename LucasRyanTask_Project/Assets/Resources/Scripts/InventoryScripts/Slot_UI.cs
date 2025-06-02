@@ -10,7 +10,7 @@ public class Slot_UI : MonoBehaviour,
     public Text quantityText;
     public Button useButton;
 
-    private int index;
+    public int Index { get; private set; }
 
     private Transform originalParent;
     private Canvas canvas;
@@ -32,7 +32,7 @@ public class Slot_UI : MonoBehaviour,
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        var slot = inventoryUI.inventory.slots[index];
+        var slot = inventoryUI.inventory.slots[Index];
         if (!slot.IsEmpty)
         {
             descriptionManager.SetDescription(slot.item);
@@ -41,28 +41,29 @@ public class Slot_UI : MonoBehaviour,
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        descriptionManager.SetDescription(null); // Oculta a descrição ao sair
+        descriptionManager.SetDescription(null);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        var slot = inventoryUI.inventory.slots[index];
-        if (slot.IsEmpty) return;
+        var slot = inventoryUI.inventory.slots[Index];
+        if (slot.IsEmpty || slot.item == null) return;
 
-        originalParent = transform.parent;
-        transform.SetParent(canvas.transform);
+        DragItemIconScript.Instance.Show(slot.item.icon);
         canvasGroup.blocksRaycasts = false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        transform.position = eventData.position;
+       /* var slot = inventoryUI.inventory.slots[Index];
+        if (slot.IsEmpty || slot.item == null) return;
+
+        transform.position = eventData.position;*/
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        transform.SetParent(originalParent);
-        transform.localPosition = Vector3.zero;
+        DragItemIconScript.Instance.Hide();
         canvasGroup.blocksRaycasts = true;
     }
 
@@ -71,20 +72,17 @@ public class Slot_UI : MonoBehaviour,
         var dragged = eventData.pointerDrag?.GetComponent<Slot_UI>();
         if (dragged == null || dragged == this) return;
 
-        var draggedSlot = inventoryUI.inventory.slots[dragged.index];
+        var draggedSlot = inventoryUI.inventory.slots[dragged.Index];
+        if (draggedSlot.IsEmpty || draggedSlot.item == null) return;
 
-        if (slotType == SlotType.WeaponSlot && draggedSlot.item != null && draggedSlot.item.isWeapon)
+        if (slotType == SlotType.WeaponSlot && draggedSlot.item.isWeapon)
         {
-            // Equipar arma
             EquipmentManager.Instance.EquipWeapon(draggedSlot.item);
-
-            // Remove do inventário (poderia mover ou duplicar, dependendo da lógica que quiser)
-            inventoryUI.inventory.slots[dragged.index].ClearSlot();
+            draggedSlot.ClearSlot();
         }
         else if (slotType == SlotType.Inventory && dragged.slotType == SlotType.Inventory)
         {
-            // Apenas troca de slots comuns
-            SwapSlots(dragged.index, this.index);
+            SwapSlots(dragged.Index, this.Index);
         }
 
         inventoryUI.UpdateUI();
@@ -105,7 +103,7 @@ public class Slot_UI : MonoBehaviour,
 
     public void SetIndex(int i)
     {
-        index = i;
+        Index = i;
         useButton.onClick.AddListener(UseItem);
     }
 
@@ -126,7 +124,7 @@ public class Slot_UI : MonoBehaviour,
 
     public void UseItem()
     {
-        var slot = inventoryUI.inventory.slots[index];
+        var slot = inventoryUI.inventory.slots[Index];
         if (!slot.IsEmpty)
         {
             slot.item.Use();

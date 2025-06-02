@@ -8,8 +8,12 @@ public class Inventory_UI : MonoBehaviour
 
     private Slot_UI[] slotUIs;
 
+    public static Inventory_UI Instance;
+
     void Awake()
     {
+        Instance = this;
+
         slotUIs = new Slot_UI[inventory.maxSlots];
 
         for (int i = 0; i < inventory.maxSlots; i++)
