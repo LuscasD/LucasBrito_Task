@@ -10,7 +10,6 @@ public class StartGameManager : MonoBehaviour
     void Start()
     {
         _inventoryManager.gameObject.SetActive(false);
-        _inventoryManager.LoadInventory();
         inventoryUIManager.UpdateUI();
 
     }
